@@ -40,8 +40,11 @@ public class Player : MonoBehaviour
     }
     public void Update()
     {
-        //healthText.text = health.ToString();
-        expText.text = experience.ToString();
-        goldText.text = gold.ToString();
+        if (healthText != null || expText != null || goldText != null)
+        {
+            //healthText.text = health.ToString();
+            expText.text = experience.ToString();
+            goldText.text = gold.ToString();
+        }
     }
 }

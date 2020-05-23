@@ -2,93 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;   
 
-[RequireComponent( typeof (Rigidbody2D))]
+
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D body;
+    private Animator anim;
+    private Rigidbody2D rb;
 
-    float horizontal;
-    float vertical;
-    float moveLimiter = 0.003f;
-    Animator anim;
-    float curSpeed;
-    float lastDirection;
+    private Vector2 move;
 
-    public float runSpeed = 1.0f;
-
+    [Range(1f,40f)]
+    public float speedForce;
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
-
-    void Update()
+  void Update()
     {
-        anim.SetFloat("Speed", runSpeed);
-        // Gives a value between -1 and 1
-        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
-        vertical = Input.GetAxisRaw("Vertical"); // -1 is down                           
-        anim.SetFloat("Direction", Input.GetAxisRaw("Horizontal"));
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            anim.SetBool("SlashBool", true);
-            anim.SetTrigger("Slash");
-        }
+        move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
 
-        if (Input.GetAxisRaw("Horizontal") < 0) 
-        {
-            lastDirection = -1;
-            anim.SetFloat("IdleDirection", lastDirection);
-            //print(anim.GetFloat("IdleDirection"));
-        }
-        else if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            lastDirection = 1;
-            anim.SetFloat("IdleDirection", lastDirection);
-           //print(anim.GetFloat("IdleDirection"));
-        }
-
-
-        //lastDirection = anim.IdleDirection;
+        anim.SetFloat("Horizontal", move.x);
+        anim.SetFloat("Vertical", move.y);
 
     }
-
     void FixedUpdate()
     {
-        if (horizontal != 0 && vertical != 0) // Check for diagonal movement
-        {
-            // limit movement speed diagonally, so you move at 70% speed
-            horizontal *= moveLimiter;
-            vertical *= moveLimiter;
-
-        }
-
-        if (horizontal != 0 || vertical != 0) // Check for diagonal movement
-        {
-            if(Input.GetKey(KeyCode.LeftShift))
-        {
-                runSpeed = 5.0f;
-                print(runSpeed);
-            }
-            else
-            runSpeed = 1;
-
-        }
-        else 
-        {
-            runSpeed = 0;
-        }
-
-        
-
-
-
-        body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
-    }
-
-    public void SlashingEND() 
-    {
-        anim.SetBool("SlashBool", false);
+       
+        rb.MovePosition(rb.position + move * speedForce * Time.fixedDeltaTime);
     }
 }
