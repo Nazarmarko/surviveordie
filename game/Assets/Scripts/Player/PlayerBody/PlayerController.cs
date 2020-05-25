@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 move;
 
-    [Range(1f,40f)]
-    public float speedForce;
-    void Start()
+    [Range(0.1f, 5f)]
+    public float speedForce, accelerateForce;
+    
+    private float forceNormilized;
+    void OnEnable()
     {
+        forceNormilized = speedForce;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -21,10 +24,11 @@ public class PlayerController : MonoBehaviour
     {
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+        if (Input.GetKey(KeyCode.LeftShift)) { speedForce = accelerateForce; }else { speedForce = forceNormilized; }
 
         anim.SetFloat("Horizontal", move.x);
         anim.SetFloat("Vertical", move.y);
-
+        anim.SetFloat("speed", move.sqrMagnitude);
     }
     void FixedUpdate()
     {
