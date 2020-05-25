@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedForce: 1
-  accelerateForce: 0
+  accelerateForce: 2
 --- !u!4 &625083298
 Transform:
   m_ObjectHideFlags: 0
