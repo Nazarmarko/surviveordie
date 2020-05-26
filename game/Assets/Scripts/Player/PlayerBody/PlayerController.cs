@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 move;
 
-    [Range(0.1f, 5f)]
+    [Range(0.1f, 20f)]
     public float speedForce, accelerateForce;
     
     private float forceNormilized;

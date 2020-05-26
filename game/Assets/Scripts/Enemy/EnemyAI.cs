@@ -15,26 +15,18 @@ public class EnemyAI : MonoBehaviour
     public int health;
     [SerializeField]
     private int dmg;
-    private Animator anim1;
+   // private Animator anim1;
     public GameObject bloodEffect;
     bool dead;
 
-    
-
-
-
-    private void Awake()
+    private void OnEnable()
     {
         dead = false;
         mySpriteRenderer = GetComponent<SpriteRenderer>();
-    }
+        //anim1 = GetComponent<Animator>();
 
-    void Start()
-    {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        anim1 = GetComponent<Animator>();
     }
-
     void Update()
     {
         if (Vector2.Distance(transform.position, target.position) > offset) 
@@ -51,11 +43,11 @@ public class EnemyAI : MonoBehaviour
         }
         if (Vector2.Distance(transform.position, target.position) <= offset)
         {
-            anim1.SetBool("Attack", true);
+          //  anim1.SetBool("Attack", true);
         }
         else
         {
-            anim1.SetBool("Attack", false);
+            //anim1.SetBool("Attack", false);
         }
 
         if (health <= 0)
@@ -79,8 +71,8 @@ public class EnemyAI : MonoBehaviour
     void Death()
     {
         dead = true;
-        anim1.SetTrigger("Death");
-        Player.Instance.GoBattle();
+      //  anim1.SetTrigger("Death");
+   //     Player.Instance.GoBattle();
         /*if (Player.Instance.quest.IsActive) 
         {
             Player.Instance.quest.goal.EnemyKilled();
@@ -96,13 +88,11 @@ public class EnemyAI : MonoBehaviour
 
     public void GiveDamage()
     {
-        Health.Instance.TakeDamage(dmg);
+       // Health.Instance.TakeDamage(dmg);
     }
 
     public void Shoot() 
     {
-        GetComponentInChildren<FireballSpawner>().FireBullet();
+       // GetComponentInChildren<FireballSpawner>().FireBullet();
     }
-
-
 }
