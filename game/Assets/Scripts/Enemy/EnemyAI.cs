@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed;
-
-    public float offset = 1.6f;
+    [Range(0,20)]
+    public float speed, stopDistance, retreatDistance;
 
     private Transform target;
 
@@ -14,25 +13,44 @@ public class EnemyAI : MonoBehaviour
 
     public int health;
     [SerializeField]
-    private int dmg;
-   // private Animator anim1;
+    private int EnemyDamage;
+    // private Animator EnemyAnimator;
     public GameObject bloodEffect;
-    bool dead;
 
+    public bool isShooting;
     private void OnEnable()
     {
-        dead = false;
         mySpriteRenderer = GetComponent<SpriteRenderer>();
-        //anim1 = GetComponent<Animator>();
+        //EnemyAnimator = GetComponent<Animator>();
 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
-    void Update()
+   void Update()
     {
-        if (Vector2.Distance(transform.position, target.position) > offset) 
+
+        #region Movement
+        float distanceToTarget = Vector2.Distance(transform.position, target.position);
+        print(distanceToTarget);
+        if (distanceToTarget > stopDistance) 
         {
+            //EnemyAnimator.SetBool("Attack", false);
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
+       else if (distanceToTarget < stopDistance && distanceToTarget > retreatDistance)
+        {
+            transform.position = this.transform.position;
+
+          /*  Attack(EnemyDamage);
+             EnemyAnimator.SetBool("Attack", true);*/
+        }
+        else if (distanceToTarget < retreatDistance)
+        {
+            print("fuckMeWell");
+            transform.position = Vector2.MoveTowards(transform.position, target.position, -speed * Time.deltaTime);
+        }
+        #endregion
+
+        #region SpriteFlip
         if (target.position.x < this.transform.position.x)
         {
             mySpriteRenderer.flipX = true;
@@ -41,38 +59,24 @@ public class EnemyAI : MonoBehaviour
         {
             mySpriteRenderer.flipX = false;
         }
-        if (Vector2.Distance(transform.position, target.position) <= offset)
-        {
-          //  anim1.SetBool("Attack", true);
-        }
-        else
-        {
-            //anim1.SetBool("Attack", false);
-        }
+        #endregion
 
+        #region HealthTracker
         if (health <= 0)
         {
-            if (!dead)
-            {
-                Death();
-                Destroy(gameObject, 0.5f);
-            }
-            
+               Death();
+                Destroy(gameObject, 0.5f);          
         }
+        #endregion
     }
-
     public void TakeDamage(int damage)
     {
-        //Instantiate(bloodEffect, transform.position, Quaternion.identity);
         health -= damage;
-        // Debug.Log("damage Taken");
     }
-
     void Death()
     {
-        dead = true;
-      //  anim1.SetTrigger("Death");
-   //     Player.Instance.GoBattle();
+        //  EnemyAnimator.SetTrigger("Death");
+        //     Player.Instance.GoBattle();
         /*if (Player.Instance.quest.IsActive) 
         {
             Player.Instance.quest.goal.EnemyKilled();
@@ -85,14 +89,17 @@ public class EnemyAI : MonoBehaviour
         }    
         */
     }
-
-    public void GiveDamage()
+    void Attack(float damageToGive) 
     {
-       // Health.Instance.TakeDamage(dmg);
+        if (isShooting)
+        {
+            Debug.Log("piyyy" + damageToGive);
+        }
+        else if(!isShooting)
+        {
+            print("xaaiiaaaa" +  damageToGive);
+        }
     }
 
-    public void Shoot() 
-    {
-       // GetComponentInChildren<FireballSpawner>().FireBullet();
-    }
+  
 }
