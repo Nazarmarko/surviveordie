@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float moveSpeed = 20f;
+    float moveSpeed = 5f;
 
     [SerializeField]
     private int dmg;
@@ -19,11 +19,13 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        moveDirection = (target.transform.position - transform.position).normalized * moveSpeed;
-        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
-        Destroy(gameObject, 3f);
+        moveDirection = (target.transform.position - transform.position).normalized * moveSpeed; 
+        Destroy(gameObject, 10f);
     }
-
+     void FixedUpdate()
+    {
+        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.name.Equals("Player"))

@@ -2,104 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : Singleton<EnemyAI>
 {
-    [Range(0,20)]
-    public float speed, stopDistance, retreatDistance;
+    [Range(.1f,30)]
+   public float enemyMoveSpeed, minMoveDistance, minRetreatDistance;
 
-    private Transform target;
+    public Transform[] moveSpotsTransform;
 
-    private SpriteRenderer mySpriteRenderer;
-
-    public int health;
-    [SerializeField]
-    private int EnemyDamage;
-    // private Animator EnemyAnimator;
-    public GameObject bloodEffect;
-
-    public bool isShooting;
-    private void OnEnable()
+    public Transform playerTransform;
+    void Awake()
     {
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
-        //EnemyAnimator = GetComponent<Animator>();
-
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
-   void Update()
+     void Update()
     {
+       float distancetoTarget = Vector2.Distance(transform.position, playerTransform.position);
 
-        #region Movement
-        float distanceToTarget = Vector2.Distance(transform.position, target.position);
-        print(distanceToTarget);
-        if (distanceToTarget > stopDistance) 
+        if(distancetoTarget > minMoveDistance)
         {
-            //EnemyAnimator.SetBool("Attack", false);
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            //move
         }
-       else if (distanceToTarget < stopDistance && distanceToTarget > retreatDistance)
-        {
-            transform.position = this.transform.position;
-
-          /*  Attack(EnemyDamage);
-             EnemyAnimator.SetBool("Attack", true);*/
+        else if(distancetoTarget < minMoveDistance && distancetoTarget <= minMoveDistance){
+            //retreat
         }
-        else if (distanceToTarget < retreatDistance)
+        else
         {
-            print("fuckMeWell");
-            transform.position = Vector2.MoveTowards(transform.position, target.position, -speed * Time.deltaTime);
-        }
-        #endregion
-
-        #region SpriteFlip
-        if (target.position.x < this.transform.position.x)
-        {
-            mySpriteRenderer.flipX = true;
-        }
-        else 
-        {
-            mySpriteRenderer.flipX = false;
-        }
-        #endregion
-
-        #region HealthTracker
-        if (health <= 0)
-        {
-               Death();
-                Destroy(gameObject, 0.5f);          
-        }
-        #endregion
-    }
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-    }
-    void Death()
-    {
-        //  EnemyAnimator.SetTrigger("Death");
-        //     Player.Instance.GoBattle();
-        /*if (Player.Instance.quest.IsActive) 
-        {
-            Player.Instance.quest.goal.EnemyKilled();
-            if (Player.Instance.quest.goal.IsReached())
-            {
-                //  experience += quest.experienceReward;
-                //  gold += quest.goldReward;
-                Player.Instance.quest.Complete();
-            }
-        }    
-        */
-    }
-    void Attack(float damageToGive) 
-    {
-        if (isShooting)
-        {
-            Debug.Log("piyyy" + damageToGive);
-        }
-        else if(!isShooting)
-        {
-            print("xaaiiaaaa" +  damageToGive);
+            //shoot
         }
     }
-
-  
 }
