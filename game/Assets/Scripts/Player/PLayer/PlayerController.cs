@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {     
-        rb.MovePosition((rb.position + move) * speedForce * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + move * speedForce * Time.fixedDeltaTime);
     }
    public void TakeDamage(float damage)
     {
