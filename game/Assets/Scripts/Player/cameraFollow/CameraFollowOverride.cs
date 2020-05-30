@@ -19,7 +19,7 @@ public class CameraFollowOverride : CameraController
         if (questWindow == null)
             return;
 
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.U) && !IsOpened)
         {     
             questWindow.SetActive(true);
             IsOpened = true;
