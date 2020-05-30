@@ -5,29 +5,35 @@ using UnityEngine;
 public class EnemyAI : Singleton<EnemyAI>
 {
     [Range(.1f,30)]
-   public float enemyMoveSpeed, minMoveDistance, minRetreatDistance;
+   public float enemyMoveSpeed, minMoveDistance, retreatDistance;
 
     public Transform[] moveSpotsTransform;
-
     public Transform playerTransform;
+    private Animator enemyAnim;
+
     void Awake()
     {
+        enemyAnim = GetComponent<Animator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
      void Update()
     {
        float distancetoTarget = Vector2.Distance(transform.position, playerTransform.position);
 
-        if(distancetoTarget > minMoveDistance)
+        if (distancetoTarget < minMoveDistance && distancetoTarget > retreatDistance)
         {
-            //move
+            enemyAnim.SetBool("isFollowing", true);
+            enemyAnim.SetBool("isPatrolling", false);
         }
-        else if(distancetoTarget < minMoveDistance && distancetoTarget <= minMoveDistance){
-            //retreat
-        }
-        else
+        else if(distancetoTarget < minMoveDistance && distancetoTarget < retreatDistance)
         {
-            //shoot
+            enemyAnim.SetBool("isFollowing", false);
+            enemyAnim.SetBool("isPatrolling", false);
+        }
+        else if (distancetoTarget >= minMoveDistance && retreatDistance < distancetoTarget)
+        {
+            enemyAnim.SetBool("isFollowing", false);
+            enemyAnim.SetBool("isPatrolling", true);
         }
     }
 }

@@ -3666,9 +3666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf9a6e7b70c9d046a180059e8321695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMoveSpeed: 7.22
-  minMoveDistance: 0
-  minRetreatDistance: 0
+  enemyMoveSpeed: 2
+  minMoveDistance: 10
+  retreatDistance: 5
   moveSpotsTransform:
   - {fileID: 756455130}
   - {fileID: 1835482244}
