@@ -2,39 +2,97 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : Singleton<EnemyAI>
+public class EnemyAI : MonoBehaviour
 {
-    [Range(.1f,30)]
-   public float enemyMoveSpeed, minMoveDistance, retreatDistance, startShootTime;
+    public float speed;
 
-    public GameObject bullet;
-    public Transform[] moveSpotsTransform;
-    public Transform playerTransform;
-    private Animator enemyAnim;
+    public float offset = 1.6f;
 
-    void Awake()
+    private Transform target;
+
+    private SpriteRenderer mySpriteRenderer;
+
+    public int health;
+    [SerializeField]
+    private int dmg;
+   // private Animator anim1;
+    public GameObject bloodEffect;
+    bool dead;
+
+    private void OnEnable()
     {
-        enemyAnim = GetComponent<Animator>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        dead = false;
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        //anim1 = GetComponent<Animator>();
+
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
-     void Update()
+    void Update()
     {
-       float distancetoTarget = Vector2.Distance(transform.position, playerTransform.position);
+        if (Vector2.Distance(transform.position, target.position) > offset) 
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
+        if (target.position.x < this.transform.position.x)
+        {
+            mySpriteRenderer.flipX = true;
+        }
+        else 
+        {
+            mySpriteRenderer.flipX = false;
+        }
+        if (Vector2.Distance(transform.position, target.position) <= offset)
+        {
+          //  anim1.SetBool("Attack", true);
+        }
+        else
+        {
+            //anim1.SetBool("Attack", false);
+        }
 
-        if (distancetoTarget < minMoveDistance && distancetoTarget > retreatDistance)
+        if (health <= 0)
         {
-            enemyAnim.SetBool("isFollowing", true);
-            enemyAnim.SetBool("isPatrolling", false);
+            if (!dead)
+            {
+                Death();
+                Destroy(gameObject, 0.5f);
+            }
+            
         }
-        else if(distancetoTarget < minMoveDistance && distancetoTarget < retreatDistance)
+    }
+
+    public void TakeDamage(int damage)
+    {
+        //Instantiate(bloodEffect, transform.position, Quaternion.identity);
+        health -= damage;
+        // Debug.Log("damage Taken");
+    }
+
+    void Death()
+    {
+        dead = true;
+      //  anim1.SetTrigger("Death");
+   //     Player.Instance.GoBattle();
+        /*if (Player.Instance.quest.IsActive) 
         {
-            enemyAnim.SetBool("isFollowing", false);
-            enemyAnim.SetBool("isPatrolling", false);
-        }
-        else if (distancetoTarget >= minMoveDistance && retreatDistance < distancetoTarget)
-        {
-            enemyAnim.SetBool("isFollowing", false);
-            enemyAnim.SetBool("isPatrolling", true);
-        }
+            Player.Instance.quest.goal.EnemyKilled();
+            if (Player.Instance.quest.goal.IsReached())
+            {
+                //  experience += quest.experienceReward;
+                //  gold += quest.goldReward;
+                Player.Instance.quest.Complete();
+            }
+        }    
+        */
+    }
+
+    public void GiveDamage()
+    {
+       // Health.Instance.TakeDamage(dmg);
+    }
+
+    public void Shoot() 
+    {
+       // GetComponentInChildren<FireballSpawner>().FireBullet();
     }
 }

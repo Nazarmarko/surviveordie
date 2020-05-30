@@ -13,9 +13,9 @@ public class QuestGiver : MonoBehaviour
     public Text experienceText;
     public Text goldText;
 
-    public void OpenQuestWindow() 
+    public void OpenQuestWindow()
     {
-        Debug.Log("Opened"); 
+        Debug.Log("Opened");
         QuestWindow.SetActive(true);
         titleText.text = quest.title;
         descriptionText.text = quest.description;
@@ -23,9 +23,10 @@ public class QuestGiver : MonoBehaviour
         goldText.text = quest.goldReward.ToString();
     }
 
-    public void AcceptQuest() 
+    public void AcceptQuest()
     {
         QuestWindow.SetActive(false);
         quest.IsActive = true;
+       // player.quest = quest;
     }
 }

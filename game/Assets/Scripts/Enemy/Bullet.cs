@@ -1,34 +1,42 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-  private  float moveSpeed = 5f;
+    float moveSpeed = 20f;
 
-    [Range(0f,30)]
-   public  int damaheToGive;
+    [SerializeField]
+    private int dmg;
 
-   private Rigidbody2D rb;
+    Rigidbody2D rb;
 
     private Transform target;
-    private Vector2 moveDirection;
-    void OnEnable()
+    Vector2 moveDirection;
+
+    // Use this for initialization
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        moveDirection = (target.transform.position - transform.position).normalized * moveSpeed; 
-        Destroy(gameObject, 10f);
-    }
-     void FixedUpdate()
-    {
+        moveDirection = (target.transform.position - transform.position).normalized * moveSpeed;
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
+        Destroy(gameObject, 3f);
     }
-    void OnCollisionEnter2D(Collision2D col)
+
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.name.Equals("Player"))
         {
-            col.gameObject.GetComponent<PlayerController>().TakeDamage(damaheToGive);
+            Debug.Log("Hit!");
+            Health.Instance.TakeDamage(dmg);
             Destroy(gameObject);
         }
     }
+
+    void GiveDamage()
+    {
+        Health.Instance.TakeDamage(dmg);
+    }
+
 }
