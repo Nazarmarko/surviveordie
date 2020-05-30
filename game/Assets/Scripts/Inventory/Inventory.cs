@@ -8,7 +8,7 @@ public class Inventory
 
     void GetItem() 
     {
-    
+        //GetComppList<Inventory = this;
     } 
 
 
