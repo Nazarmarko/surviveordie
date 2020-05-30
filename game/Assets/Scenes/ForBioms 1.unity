@@ -542,6 +542,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9339623, g: 0.8943129, b: 0.8943129, a: 0.25490198}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -23435,6 +23436,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -23526,6 +23528,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9339623, g: 0.8943129, b: 0.8943129, a: 0.25490198}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -25396,6 +25399,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9339623, g: 0.8943129, b: 0.8943129, a: 0.25490198}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -25550,6 +25554,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.7372549}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -40823,6 +40828,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9339623, g: 0.8943129, b: 0.8943129, a: 0.25490198}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -40965,6 +40971,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9339623, g: 0.8943129, b: 0.8943129, a: 0.25490198}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -127166,6 +127173,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9339623, g: 0.8943129, b: 0.8943129, a: 0.25490198}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -127404,6 +127412,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedForce: 5
   accelerateForce: 2
+  health: 0
+  experience: 0
+  gold: 0
+  healthText: {fileID: 0}
+  expText: {fileID: 0}
+  goldText: {fileID: 0}
 --- !u!114 &6678065893517753859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127467,14 +127481,15 @@ GameObject:
   - component: {fileID: 6678065893517753856}
   - component: {fileID: 6678065893517753862}
   - component: {fileID: 6678065893517753857}
+  - component: {fileID: 6678065893517753923}
   - component: {fileID: 6678065893517753858}
   - component: {fileID: 6678065893517753863}
   - component: {fileID: 6678065893517753859}
   - component: {fileID: 6678065893517753918}
   - component: {fileID: 6678065893517753920}
   - component: {fileID: 6678065893517753919}
-  - component: {fileID: 6678065893517753921}
   - component: {fileID: 6678065893517753922}
+  - component: {fileID: 6678065893517753921}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -127494,9 +127509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e992b386350ca3c47bdb9051e3115f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortingOrderBase: 5000
-  offset: 0
-  runOnlyOnce: 0
 --- !u!61 &6678065893517753919
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127558,9 +127570,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6678065893517753917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08824671b54bccd4bb587d6d9ad7c770, type: 3}
+  m_Script: {fileID: 11500000, guid: a182ca6a39285584797e791c4a639030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SortingOrderBase: 5000
+  offset: 0
+  runOnlyOnce: 0
 --- !u!58 &6678065893517753922
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -127577,6 +127592,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.11}
   serializedVersion: 2
   m_Radius: 0.03
+--- !u!114 &6678065893517753923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678065893517753917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a182ca6a39285584797e791c4a639030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortingOrderBase: 5000
+  offset: 0
+  runOnlyOnce: 0
 --- !u!1001 &7357563020932162666
 PrefabInstance:
   m_ObjectHideFlags: 0

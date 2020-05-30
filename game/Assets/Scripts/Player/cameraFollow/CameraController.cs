@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     }
 
     protected virtual void UIInteract() { } 
-    void Update()
+    void LateUpdate()
     {
         Vector3 cameraFollowPosition = cameraFollowPositionFunc();
         cameraFollowPosition.z = transform.position.z;
