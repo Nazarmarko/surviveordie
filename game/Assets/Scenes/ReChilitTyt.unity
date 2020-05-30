@@ -3669,6 +3669,8 @@ MonoBehaviour:
   enemyMoveSpeed: 2
   minMoveDistance: 10
   retreatDistance: 5
+  startShootTime: 1
+  bullet: {fileID: 544457931706851000, guid: 6f89754508a0cbf4fbb2e2d2a1b44fb2, type: 3}
   moveSpotsTransform:
   - {fileID: 756455130}
   - {fileID: 1835482244}

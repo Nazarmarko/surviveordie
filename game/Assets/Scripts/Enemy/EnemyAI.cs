@@ -5,8 +5,9 @@ using UnityEngine;
 public class EnemyAI : Singleton<EnemyAI>
 {
     [Range(.1f,30)]
-   public float enemyMoveSpeed, minMoveDistance, retreatDistance;
+   public float enemyMoveSpeed, minMoveDistance, retreatDistance, startShootTime;
 
+    public GameObject bullet;
     public Transform[] moveSpotsTransform;
     public Transform playerTransform;
     private Animator enemyAnim;
