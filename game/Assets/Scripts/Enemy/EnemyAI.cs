@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyAI : Singleton<EnemyAI>
 {
     [Range(.1f,30)]
-   public float enemyMoveSpeed, minMoveDistance, retreatDistance, startShootTime;
+   public float enemyMoveSpeed, minMoveDistance, retreatDistance, startShootTime, maxHealth;
+
+    private float currentHealth;
 
     public GameObject bullet;
     public Transform[] moveSpotsTransform;
@@ -14,6 +16,7 @@ public class EnemyAI : Singleton<EnemyAI>
 
     void Awake()
     {
+        currentHealth = maxHealth;
         enemyAnim = GetComponent<Animator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -36,5 +39,11 @@ public class EnemyAI : Singleton<EnemyAI>
             enemyAnim.SetBool("isFollowing", false);
             enemyAnim.SetBool("isPatrolling", true);
         }
+
+        if(currentHealth <=0)
+        {
+            Debug.Log("FuckinDie");
+        }
     }
+    public void TakeDamage(float damageFromPlayer) { currentHealth -= damageFromPlayer; Debug.Log("FuckinDie"); }
 }

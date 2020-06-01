@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     }
   void Update()
     {
-        print(health);
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         if (Input.GetKey(KeyCode.LeftShift)) { speedForce = accelerateForce; }else { speedForce = forceNormilized; }

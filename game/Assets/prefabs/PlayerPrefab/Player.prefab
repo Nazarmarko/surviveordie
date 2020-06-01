@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7419472586754634239}
   - component: {fileID: 6645311814671170640}
   - component: {fileID: 5448751915770042298}
+  - component: {fileID: 7126267128028225115}
   - component: {fileID: 3679193180498503801}
   - component: {fileID: 8234913629400489380}
   - component: {fileID: 1251962860538319477}
@@ -125,6 +126,22 @@ MonoBehaviour:
   healthText: {fileID: 0}
   expText: {fileID: 0}
   goldText: {fileID: 0}
+--- !u!114 &7126267128028225115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251962860538319478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0879cef90387814a958db0222ec90c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 2
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &3679193180498503801
 Rigidbody2D:
   serializedVersion: 4
