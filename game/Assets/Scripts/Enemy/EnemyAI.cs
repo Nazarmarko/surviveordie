@@ -45,5 +45,5 @@ public class EnemyAI : Singleton<EnemyAI>
             Debug.Log("FuckinDie");
         }
     }
-    public void TakeDamage(float damageFromPlayer) { currentHealth -= damageFromPlayer; Debug.Log("FuckinDie"); }
+    public void TakeDamage(float damageFromPlayer) { currentHealth -= damageFromPlayer; }
 }
