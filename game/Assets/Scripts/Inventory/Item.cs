@@ -1,18 +1,43 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[Serializable]
+public class Item 
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum ItemType 
     {
-        
+    Sword,
+    HealthPotion,
+    ManaPotion,
+    Coin,
+    }
+    public ItemType itemType;
+    public int amount;
+    public Sprite GetSprite() 
+    {
+        switch (itemType) 
+        {
+            default:
+            case ItemType.Sword: return ItemAssets.Instance.swordSprite;
+            case ItemType.HealthPotion: return ItemAssets.Instance.healthPotionSprite;
+            case ItemType.ManaPotion: return ItemAssets.Instance.manaPotionSprite;
+            case ItemType.Coin: return ItemAssets.Instance.coinSprite;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool IsStackable() 
     {
-        
+        switch (itemType) 
+        {
+            default:
+            case ItemType.Coin:
+            case ItemType.HealthPotion:
+            case ItemType.ManaPotion:
+                return (true);
+            case ItemType.Sword:
+                return (false);
+        }
     }
 }
