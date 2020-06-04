@@ -128200,7 +128200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6284ae649c332ca47b7d5fe48cacb385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiInventory: {fileID: 1595816502}
 --- !u!58 &1251962861759976831
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -128341,6 +128340,7 @@ MonoBehaviour:
   healthText: {fileID: 0}
   expText: {fileID: 0}
   goldText: {fileID: 0}
+  uiInventory: {fileID: 1595816502}
 --- !u!1001 &6041413303576088888
 PrefabInstance:
   m_ObjectHideFlags: 0

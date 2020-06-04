@@ -16,13 +16,13 @@ public class PlayerController : MonoBehaviour
 
     public TMP_Text healthText, expText, goldText;
 
-  /*  #region Inventory
+    #region Inventory
     public static PlayerController Instance { get; private set; }
 
-   private Inventory inventory;
+    private Inventory inventory;
     [SerializeField] private UI_Inventory uiInventory;
 
-    [SerializeField] private MaterialTintColor materialTintColor;
+   // [SerializeField] private MaterialTintColor materialTintColor;
 
     private State state;
 
@@ -30,13 +30,13 @@ public class PlayerController : MonoBehaviour
     {
         Normal,
     }
-    #endregion*/
+    #endregion
     void OnEnable()
     {
-      /*  uiInventory.SetPlayer(this);
+        uiInventory.SetPlayer(this);
         uiInventory.SetInventory(inventory);
 
-        inventory = new Inventory(UseItem);*/
+        inventory = new Inventory(UseItem);
 
         forceNormilized = speedForce;
 
@@ -79,30 +79,30 @@ public class PlayerController : MonoBehaviour
         health -= damage;
     }
 
-  /*  #region InventoryMethods
+    #region InventoryMethods
     private void UseItem(Item item)
     {
         switch (item.itemType)
         {
             case Item.ItemType.HealthPotion:
-                FlashGreen();
+              //  FlashGreen();
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
                 break;
             case Item.ItemType.ManaPotion:
-                FlashBlue();
+               // FlashBlue();
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.ManaPotion, amount = 1 });
                 break;
         }
     }
-    private void DamageFlash()
-    {
-        materialTintColor.SetTintColor(new Color(1, 0, 0, 1f));
-    }
+    //private void DamageFlash()
+    //{
+    //    materialTintColor.SetTintColor(new Color(1, 0, 0, 1f));
+    //}
 
     public void DamageKnockback(Vector3 knockbackDir, float knockbackDistance)
     {
         transform.position += knockbackDir * knockbackDistance;
-        DamageFlash();
+      //  DamageFlash();
     }
 
     public Vector3 GetPosition()
@@ -110,28 +110,28 @@ public class PlayerController : MonoBehaviour
         return transform.position;
     }
 
-    public void FlashGreen()
-    {
-        materialTintColor.SetTintColor(new Color(0, 1, 0, 1));
-    }
+    //public void FlashGreen()
+    //{
+    //    materialTintColor.SetTintColor(new Color(0, 1, 0, 1));
+    //}
 
-    public void FlashRed()
-    {
-        materialTintColor.SetTintColor(new Color(1, 0, 0, 1));
-    }
+    //public void FlashRed()
+    //{
+    //    materialTintColor.SetTintColor(new Color(1, 0, 0, 1));
+    //}
 
-    public void FlashBlue()
-    {
-        materialTintColor.SetTintColor(new Color(0, 0, 1, 1));
-    }
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-        if (itemWorld != null)
-        {
-            inventory.AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
-        }
-    }
-    #endregion*/
+    //public void FlashBlue()
+    //{
+    //    materialTintColor.SetTintColor(new Color(0, 0, 1, 1));
+    //}
+    //private void OnTriggerEnter2D(Collider2D collider)
+    //{
+    //    ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+    //    if (itemWorld != null)
+    //    {
+    //        inventory.AddItem(itemWorld.GetItem());
+    //        itemWorld.DestroySelf();
+    //    }
+    //}
+    #endregion
 }
