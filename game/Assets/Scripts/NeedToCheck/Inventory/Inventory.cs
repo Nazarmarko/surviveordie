@@ -51,7 +51,7 @@ public class Inventory {
         } else {
             itemList.Remove(item);
         }
-        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        OnItemListChanged.Invoke(this, EventArgs.Empty);
     }
 
     public void UseItem(Item item) {
