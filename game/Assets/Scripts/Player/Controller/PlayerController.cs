@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public TMP_Text healthText, expText, goldText;
 
-    #region Inventory
+  /*  #region Inventory
     public static PlayerController Instance { get; private set; }
 
    private Inventory inventory;
@@ -30,13 +30,13 @@ public class PlayerController : MonoBehaviour
     {
         Normal,
     }
-    #endregion
+    #endregion*/
     void OnEnable()
     {
-        uiInventory.SetPlayer(this);
+      /*  uiInventory.SetPlayer(this);
         uiInventory.SetInventory(inventory);
 
-        inventory = new Inventory(UseItem);
+        inventory = new Inventory(UseItem);*/
 
         forceNormilized = speedForce;
 
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         health -= damage;
     }
 
-    #region InventoryMethods
+  /*  #region InventoryMethods
     private void UseItem(Item item)
     {
         switch (item.itemType)
@@ -133,5 +133,5 @@ public class PlayerController : MonoBehaviour
             itemWorld.DestroySelf();
         }
     }
-    #endregion
+    #endregion*/
 }

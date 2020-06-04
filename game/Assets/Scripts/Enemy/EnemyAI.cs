@@ -13,16 +13,26 @@ public class EnemyAI : Singleton<EnemyAI>
     public Transform[] moveSpotsTransform;
     public Transform playerTransform;
     private Animator enemyAnim;
-
+    private SpriteRenderer enemySprite;
     void Awake()
     {
         currentHealth = maxHealth;
+
+        enemySprite = GetComponent<SpriteRenderer>();
         enemyAnim = GetComponent<Animator>();
+
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
      void Update()
     {
        float distancetoTarget = Vector2.Distance(transform.position, playerTransform.position);
+        if(transform.position.x >= playerTransform.position.x)
+        {
+            enemySprite.flipX = false;
+        }else
+        {
+            enemySprite.flipX = true;
+        }
 
         if (distancetoTarget < minMoveDistance && distancetoTarget > retreatDistance)
         {
