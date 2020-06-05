@@ -20,7 +20,7 @@ public class ItemWorld : MonoBehaviour
 
        ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir * 1f, item);
 
-        itemWorld.GetComponent<Rigidbody2D>().AddForce(randomDir * 1f, ForceMode2D.Impulse);
+        itemWorld.GetComponent<Rigidbody2D>().AddForce(randomDir * 10f, ForceMode2D.Impulse);
         return itemWorld;
     }
 

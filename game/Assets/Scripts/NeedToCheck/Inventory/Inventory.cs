@@ -37,6 +37,7 @@ public class Inventory {
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
     public void RemoveItem(Item item) {
+        Debug.Log("ItemRemoveMEthodCalled");
         if (item.IsStackable()) {
             Item itemInInventory = null;
             foreach (Item inventoryItem in itemList) {

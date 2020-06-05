@@ -26,18 +26,6 @@ public class Item {
         case ItemType.Coin:         return ItemAssets.Instance.coinSprite;
         }
     }
-
-    //public Color GetColor() {
-    //    switch (itemType) {
-    //    default:
-    //    case ItemType.Sword:        return new Color(1, 1, 1);
-    //    case ItemType.HealthPotion: return new Color(1, 0, 0);
-    //    case ItemType.ManaPotion:   return new Color(0, 0, 1);
-    //    case ItemType.Coin:         return new Color(1, 1, 0);
-    //    case ItemType.Medkit:       return new Color(1, 0, 1);
-    //    }
-    //}
-
     public bool IsStackable() {
         switch (itemType) {
         default:

@@ -63,11 +63,11 @@ public class UI_Inventory : MonoBehaviour
                 Item duplicateItem = new Item { itemType = item.itemType, amount = item.amount };
 
                 inventory.RemoveItem(item);
-                ItemWorld.DropItem(player.GetPosition(), duplicateItem) ;
+                ItemWorld.DropItem(player.GetPosition(), duplicateItem);
 
             };
 
-            itemSlotRectTransform.anchoredPosition = new Vector2(x*itemSlotCellSize, y*itemSlotCellSize);
+            itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
             Image image = itemSlotRectTransform.Find("image").GetComponent<Image>();
             image.sprite = item.GetSprite();
 
