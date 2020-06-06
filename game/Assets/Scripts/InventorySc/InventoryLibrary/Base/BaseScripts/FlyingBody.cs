@@ -43,8 +43,7 @@ public class FlyingBody : MonoBehaviour {
         eulerZ += eulerSpeed * Time.deltaTime;
         transform.localEulerAngles = new Vector3(0, 0, eulerZ);
 
-        Blood_Handler.SpawnBlood(5, transform.position, flyDirection * -1f);
-
+        
         timer += Time.deltaTime;
         if (timer >= 1f) {
             Destroy(gameObject);

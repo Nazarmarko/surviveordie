@@ -128158,6 +128158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251962861762218027}
   - component: {fileID: 5448751916727324848}
+  - component: {fileID: 1251962861759976830}
   - component: {fileID: 7126267127108688209}
   - component: {fileID: 7419472585830905589}
   - component: {fileID: 6645311815865563994}
@@ -128165,7 +128166,6 @@ GameObject:
   - component: {fileID: 1251962861759976831}
   - component: {fileID: 8234913628470467246}
   - component: {fileID: 1251962861759976829}
-  - component: {fileID: 1251962861759976830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -128197,9 +128197,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1251962861759976828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6284ae649c332ca47b7d5fe48cacb385, type: 3}
+  m_Script: {fileID: 11500000, guid: 4142890c3d1ef924bb85c86c6c2a709e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiInventory: {fileID: 1595816502}
 --- !u!58 &1251962861759976831
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -128340,7 +128341,6 @@ MonoBehaviour:
   healthText: {fileID: 0}
   expText: {fileID: 0}
   goldText: {fileID: 0}
-  uiInventory: {fileID: 1595816502}
 --- !u!1001 &6041413303576088888
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey;
 using CodeMonkey.Utils;
-using InventoryCamera;
+
 using V_AnimationSystem;
 
 namespace V_ObjectSystem {
@@ -378,7 +378,7 @@ namespace V_ObjectSystem {
             V_UnitSkeleton.OnAnimComplete onAnimComplete = delegate (UnitAnim u) {
                 instancedObject.DestroySelf();
             };
-            instancedObject.GetLogic<V_IObjectTransform>().GetTransform().GetComponent<InventoryCamera.PositionRendererSorter>().SetOffset(sortingOrderOffset);
+           
             instancedObject.GetLogic<V_UnitAnimation>().PlayAnimForced(unitAnim, frameRateMod, onAnimComplete, null, null);
             instancedObject.GetLogic<V_IObjectTransform>().SetEulerZ(GetAngleFromVector(rotatePrefabDir));
             instancedObject.GetLogic<V_IObjectTransform>().SetScale(scalePrefab);

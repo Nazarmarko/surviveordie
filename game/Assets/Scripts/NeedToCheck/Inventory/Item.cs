@@ -11,6 +11,7 @@ public class Item {
         HealthPotion,
         ManaPotion,
         Coin,
+        Medkit,
     }
 
     public ItemType itemType;
@@ -34,6 +35,7 @@ public class Item {
         case ItemType.ManaPotion:
             return true;
         case ItemType.Sword:
+        case ItemType.Medkit:
             return false;
         }
     }
