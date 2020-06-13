@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<PlayerController>().TakeDamage(damaheToGive);
+            col.gameObject.GetComponent<HealthAndMoney>().TakeDamage(damaheToGive);
             Destroy(gameObject);
         }
     }
