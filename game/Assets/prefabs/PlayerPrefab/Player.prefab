@@ -51,14 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedForce: 4.6
   accelerateForce: 6
-  health: 10
-  experience: 0
-  gold: 0
-  healthText: {fileID: 0}
-  expText: {fileID: 0}
-  goldText: {fileID: 0}
-  uiInventory: {fileID: 0}
-  materialTintColor: {fileID: 0}
 --- !u!114 &6974027152330052714
 MonoBehaviour:
   m_ObjectHideFlags: 0

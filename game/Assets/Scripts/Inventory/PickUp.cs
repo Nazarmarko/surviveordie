@@ -1,20 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
     private Inventory inventory;
 
-    public GameObject itemButtom;
+    private Sprite slotSprite;
     private void OnEnable()
     {
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
 
-    private void OnTriggerEnter2D(Collider2D invetoryCol)
+    private void OnTriggerEnter2D(Collider2D inventoryCol)
     {
-        if (invetoryCol.CompareTag("Inventory"))
+        if (inventoryCol.CompareTag("Player"))
         {
             for (int i = 0; i < inventory.slotInInventory.Length; i++)
             {
@@ -22,7 +21,10 @@ public class PickUp : MonoBehaviour
                 {
                     inventory.isFull[i] = true;
 
-                    Instantiate(itemButtom, inventory.slotInInventory[i].transform);
+                    slotSprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
+
+
+                    inventory.slotInInventory[i].gameObject.GetComponent<Image>().sprite = slotSprite;
 
                     Destroy(gameObject);
                     break;

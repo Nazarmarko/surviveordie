@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
+    public GameObject inventoryGameObject;
+
     private Vector2 move;
 
     [Range(0f, 20f)]
@@ -30,6 +32,17 @@ public class PlayerController : MonoBehaviour
         }
         else { 
             speedForce = forceNormilized; 
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (inventoryGameObject.activeSelf == false)
+            {
+                inventoryGameObject.SetActive(true);
+            }
+            else
+            {
+                inventoryGameObject.SetActive(false);
+            }      
         }
 
         anim.SetFloat("Horizontal", move.x);
