@@ -1,5 +1,5 @@
 ﻿
-using UnityEngine;   
+using UnityEngine;
 
 
 public class PlayerController : MonoBehaviour
@@ -8,12 +8,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject inventoryGameObject;
+    public Inventory inventory;
 
     private Vector2 move;
 
     [Range(0f, 20f)]
     public float speedForce, accelerateForce;
-    
+
     private float forceNormilized;
     void OnEnable()
     {
@@ -23,15 +24,17 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
-  void Update()
+    void Update()
     {
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (Input.GetKey(KeyCode.LeftShift)) { 
-            speedForce = accelerateForce; 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speedForce = accelerateForce;
         }
-        else { 
-            speedForce = forceNormilized; 
+        else
+        {
+            speedForce = forceNormilized;
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -42,7 +45,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 inventoryGameObject.SetActive(false);
-            }      
+            }
         }
 
         anim.SetFloat("Horizontal", move.x);
@@ -50,8 +53,20 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("speed", move.sqrMagnitude);
     }
     void FixedUpdate()
-    {     
+    {
         rb.MovePosition(rb.position + move * speedForce * Time.fixedDeltaTime);
     }
-
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        var item = collision.GetComponent<Item>();
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);
+            Destroy(collision.gameObject);
+        }       
+    }
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Clear();
+    }
 }
