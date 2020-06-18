@@ -45,9 +45,17 @@ public class PlayerController : MonoBehaviour
             else
             {
                 inventoryGameObject.SetActive(false);
+
             }
         }
-
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            inventory.Load();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            inventory.Save();
+        }
         anim.SetFloat("Horizontal", move.x);
         anim.SetFloat("Vertical", move.y);
         anim.SetFloat("speed", move.sqrMagnitude);
@@ -63,7 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             inventory.AddItem(item.item, 1);
             Destroy(collision.gameObject);
-        }       
+        }
     }
     private void OnApplicationQuit()
     {
