@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class GroundItem : MonoBehaviour
 {
-    public ItemPrototype item;
+    public ItemObject item;
 
   
 }

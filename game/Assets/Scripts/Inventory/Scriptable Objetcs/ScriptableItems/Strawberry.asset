@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8ee9e472aa7584da29076b851c2683, type: 3}
   m_Name: Strawberry
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3543500532140078912, guid: 5896bb1474fc2804291f3168cdc50448, type: 3}
+  ID: 0
+  uiDisplay: {fileID: 3065030316819462408, guid: e7be76e076008ec43abdf4bf14da3af0,
+    type: 3}
   type: 0
   descriptionText: Shit which makes you happy
-  restoreHealthValue: 0
+  buffs:
+  - attribute: 0
+    value: 0
+    min: 10
+    max: 20

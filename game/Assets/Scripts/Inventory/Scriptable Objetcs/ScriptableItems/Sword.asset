@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d72e9c189bfbdf4195b656da31dc428, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4740468430954350305, guid: e74667e8ccfffbb488625dae9d8c5121, type: 3}
+  ID: 1
+  uiDisplay: {fileID: -1427057786319324257, guid: e7be76e076008ec43abdf4bf14da3af0,
+    type: 3}
   type: 1
   descriptionText: big dildo
-  atkBonus: 1
-  defenceBonus: 0
+  buffs:
+  - attribute: 2
+    value: 0
+    min: 1
+    max: 3

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject inventoryGameObject;
-    public Inventory inventory;
+    public InventoryObject inventory;
 
     private Vector2 move;
 
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        var item = collision.GetComponent<Item>();
+        var item = collision.GetComponent<GroundItem>();
         if (item)
         {
             inventory.AddItem(item.item, 1);
@@ -75,6 +75,6 @@ public class PlayerController : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        inventory.Container.Clear();
+        inventory.Container.Items.Clear();
     }
 }

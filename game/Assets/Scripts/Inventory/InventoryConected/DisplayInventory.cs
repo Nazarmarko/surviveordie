@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 public class DisplayInventory : MonoBehaviour
 {
-    public Inventory inventory;
+    public GameObject inventoryPrefab;
+    public InventoryObject inventory;
 
     public int xSpaceBTWNItems, ySpaceBTWNItems, numberOfColumn, xStart, yStart;
 
@@ -19,14 +20,16 @@ public class DisplayInventory : MonoBehaviour
         CreateDisplay();
     }
     public void CreateDisplay()
-    {
-        for (int i = 0; i < inventory.Container.Count; i++)
+    { 
+        for (int i = 0; i < inventory.Container.Items.Count; i++)
         {
-            var obj = Instantiate(inventory.Container[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
-            obj.GetComponent<RectTransform>().localPosition = GetPositiion(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
+            InventorySlot slot = inventory.Container.Items[i];
 
-            itemsDisplayed.Add(inventory.Container[i], obj);
+            var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
+            obj.GetComponent<RectTransform>().localPosition = GetPositiion(i);
+            obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
+
+            itemsDisplayed.Add(slot, obj);
         }
     }  
     void Update()
@@ -35,20 +38,28 @@ public class DisplayInventory : MonoBehaviour
     }
     public void UpdateDisplay()
     {
-        for (int i = 0; i < inventory.Container.Count; i++)
+        for (int i = 0; i < inventory.Container.Items.Count; i++)
         {
-            if (itemsDisplayed.ContainsKey(inventory.Container[i]))
+            InventorySlot slot = inventory.Container.Items[i];
+
+            if (itemsDisplayed.ContainsKey(slot))
             {
-                itemsDisplayed[inventory.Container[i]].GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
+                itemsDisplayed[slot].GetComponentInChildren<TextMeshProUGUI>().text 
+                    = slot.amount.ToString("n0");
             }
             else
             {
-                var obj = Instantiate(inventory.Container[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
-                obj.GetComponent<RectTransform>().localPosition = GetPositiion(i);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
+                var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
 
-                itemsDisplayed.Add(inventory.Container[i], obj);
+                obj.transform.GetChild(0).GetComponentInChildren<Image>().sprite
+                    = inventory.database.GetItem[slot.item.ID].uiDisplay;
+
+                obj.GetComponent<RectTransform>().localPosition = GetPositiion(i);
+
+                obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
+
+                itemsDisplayed.Add(inventory.Container.Items[i], obj);
             }
-        }
+        } 
     }
 }
