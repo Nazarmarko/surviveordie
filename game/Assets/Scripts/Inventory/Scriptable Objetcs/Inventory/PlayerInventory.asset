@@ -14,4 +14,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   safePath: /inventory.Save
   database: {fileID: 11400000, guid: 59dd1699a8dc118419bdeb14a75d8544, type: 2}
-  Container: []
+  Container:
+    Items:
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []
+    - ID: -1
+      amount: 0
+      item:
+        Name: 
+        ID: 0
+        buffs: []

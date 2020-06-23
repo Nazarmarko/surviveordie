@@ -3359,8 +3359,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -315, y: 435}
-  m_SizeDelta: {x: 650, y: 895}
+  m_AnchoredPosition: {x: -535, y: 490}
+  m_SizeDelta: {x: 1100, y: 1050}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &600866825
 MonoBehaviour:
@@ -3435,9 +3435,9 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: 647fa441ce735f04c96607a2d48d5bad, type: 2}
   xSpaceBTWNItems: 175
   ySpaceBTWNItems: 175
-  numberOfColumn: 3
-  xStart: -180
-  yStart: 300
+  numberOfColumn: 5
+  xStart: -350
+  yStart: 340
 --- !u!4 &625083298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6858876380294202525, guid: 8bbe209eb59c1d648a9c86ef92eccfff,

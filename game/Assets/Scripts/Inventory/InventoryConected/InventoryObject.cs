@@ -15,7 +15,7 @@ public class InventoryObject : ScriptableObject
 
     public void AddItem(ItemObject _item, int _amount)
     {
-        if (_item.buffs.Length > 0)
+      /*  if (_item.buffs.Length > 0)
         {
             Container.Items.Add(new InventorySlot(database.GetID[_item], _item, _amount));
             return;
@@ -29,7 +29,7 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }
-        Container.Items.Add(new InventorySlot(database.GetID[_item], _item, _amount));
+        Container.Items.Add(new InventorySlot(database.GetID[_item], _item, _amount));*/
     }
     [ContextMenu("Save")]
     public void Save()
@@ -64,15 +64,20 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class Inventory
 {
-    public List<InventorySlot> Items = new List<InventorySlot>();
+    public InventorySlot[] Items = new InventorySlot[15];
 }
 [System.Serializable]
 public class InventorySlot
 {
-    public int ID, amount;
-    public ItemObject item;
-
-    public InventorySlot(int _id, ItemObject _item, int _amount)
+    public int ID = -1, amount;
+    public Item item;
+    public InventorySlot()
+    {
+        ID = -1;
+        item = null;
+        amount = 0;
+    }
+    public InventorySlot(int _id, Item _item, int _amount)
     {
         ID = _id;
         item = _item;
