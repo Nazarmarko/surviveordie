@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a8ee9e472aa7584da29076b851c2683, type: 3}
-  m_Name: Strawberry
+  m_Name: '#0Strawberry'
   m_EditorClassIdentifier: 
   ID: 0
   uiDisplay: {fileID: 3065030316819462408, guid: e7be76e076008ec43abdf4bf14da3af0,
@@ -20,5 +20,13 @@ MonoBehaviour:
   buffs:
   - attribute: 0
     value: 0
-    min: 10
+    min: 1
+    max: 15
+  - attribute: 1
+    value: 0
+    min: 9
     max: 20
+  - attribute: 0
+    value: 0
+    min: 6
+    max: 10

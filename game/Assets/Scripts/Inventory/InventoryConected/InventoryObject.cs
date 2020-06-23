@@ -15,7 +15,7 @@ public class InventoryObject : ScriptableObject
 
     public void AddItem(ItemObject _item, int _amount)
     {
-        if(_item.buffs.Length > 0)
+        if (_item.buffs.Length > 0)
         {
             Container.Items.Add(new InventorySlot(database.GetID[_item], _item, _amount));
             return;
@@ -34,12 +34,6 @@ public class InventoryObject : ScriptableObject
     [ContextMenu("Save")]
     public void Save()
     {
-        /* string saveData = JsonUtility.ToJson(this, true);
-         BinaryFormatter bf = new BinaryFormatter();
-         FileStream file = File.Create(string.Concat(Application.persistentDataPath, safePath));
-         bf.Serialize(file, saveData);
-         file.Close();*/
-
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, safePath),
             FileMode.Create, FileAccess.Write);
@@ -51,11 +45,6 @@ public class InventoryObject : ScriptableObject
     {
         if (File.Exists(string.Concat(Application.persistentDataPath, safePath)))
         {
-            /*BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(string.Concat(Application.persistentDataPath, safePath), FileMode.Open);
-            JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
-            file.Close();*/
-
             IFormatter formatter = new BinaryFormatter();
 
             Stream stream = new FileStream(string.Concat(Application.persistentDataPath, safePath)
@@ -80,9 +69,9 @@ public class Inventory
 [System.Serializable]
 public class InventorySlot
 {
-    public int ID;
+    public int ID, amount;
     public ItemObject item;
-    public int amount;
+
     public InventorySlot(int _id, ItemObject _item, int _amount)
     {
         ID = _id;

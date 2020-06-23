@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Animator anim;
+    private Animator playerAnim;
     private Rigidbody2D rb;
 
-    public GameObject inventoryGameObject;
+    public Animator inventoryAnim;
     public InventoryObject inventory;
 
     private Vector2 move;
@@ -18,16 +18,15 @@ public class PlayerController : MonoBehaviour
     private float forceNormilized;
     void OnEnable()
     {
-
         forceNormilized = speedForce;
 
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        playerAnim = GetComponent<Animator>();
     }
     void Update()
     {
+        #region MovementInput
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speedForce = accelerateForce;
@@ -36,18 +35,23 @@ public class PlayerController : MonoBehaviour
         {
             speedForce = forceNormilized;
         }
+        #endregion
+
+        #region InventoryInput
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (inventoryGameObject.activeSelf == false)
+            if (inventoryAnim.GetBool("IsOpen") == false)
             {
-                inventoryGameObject.SetActive(true);
+                inventoryAnim.SetBool("IsOpen", true);
             }
             else
             {
-                inventoryGameObject.SetActive(false);
-
+                inventoryAnim.SetBool("IsOpen", false);
             }
         }
+        #endregion
+
+        #region IventoryLoadInput
         if (Input.GetKeyDown(KeyCode.P))
         {
             inventory.Load();
@@ -56,9 +60,11 @@ public class PlayerController : MonoBehaviour
         {
             inventory.Save();
         }
-        anim.SetFloat("Horizontal", move.x);
-        anim.SetFloat("Vertical", move.y);
-        anim.SetFloat("speed", move.sqrMagnitude);
+        #endregion
+
+        playerAnim.SetFloat("Horizontal", move.x);
+        playerAnim.SetFloat("Vertical", move.y);
+        playerAnim.SetFloat("speed", move.sqrMagnitude);
     }
     void FixedUpdate()
     {

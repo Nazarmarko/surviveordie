@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class HealthAndMoney : MonoBehaviour
+public class Stats : MonoBehaviour
 {
     [Range(0.1f,30)]
     [SerializeField]float currentHealth, experience, gold, maxHealth;

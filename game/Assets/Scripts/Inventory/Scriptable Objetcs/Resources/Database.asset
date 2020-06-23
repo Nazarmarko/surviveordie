@@ -15,3 +15,8 @@ MonoBehaviour:
   itemsToUpload:
   - {fileID: 11400000, guid: 0c522b09b5f68284887439213cfb3a0f, type: 2}
   - {fileID: 11400000, guid: 4c32226080ccae041a94bb7eb2f1a1f8, type: 2}
+  - {fileID: 11400000, guid: 40f077b2b7743d0428678aa20dadd535, type: 2}
+  - {fileID: 11400000, guid: 23534755475975647970c2ee3ba54708, type: 2}
+  - {fileID: 11400000, guid: 335755cfbf043ea4e98861841c25b6b6, type: 2}
+  - {fileID: 11400000, guid: 8df8b4dfdc110ca43bbac350584115a8, type: 2}
+  - {fileID: 11400000, guid: 78df26fa59ba77e4b843057fa4253333, type: 2}
