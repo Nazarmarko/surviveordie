@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         var item = collision.GetComponent<GroundItem>();
         if (item)
         {
-            inventory.AddItem(item.item, 1);
+            inventory.AddItem(new Item(item.item), 1);
             Destroy(collision.gameObject);
         }
     }
