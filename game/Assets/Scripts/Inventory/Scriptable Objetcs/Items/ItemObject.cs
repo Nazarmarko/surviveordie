@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType { Heal, Equipment, Default }
+public enum ItemType { Heal, Helmet, Weapon, Shields, Boots, Chest, Default }
 public enum Attributes { Stamina, Health, Strength, Starve }
 public class ItemObject : ScriptableObject
 {
-    public int ID;
     public Sprite uiDisplay;
     public ItemType type;
+    public bool stackable;
 
     [TextArea(15, 20)]
     public string descriptionText;
 
-    public ItemBuff[] buffs;
+    public Item data = new Item();
 
     public Item CreateItem()
     {
@@ -26,19 +26,24 @@ public class ItemObject : ScriptableObject
 public class Item
 {
     public string Name;
-    public int ID;
+    public int ID = -1;
 
     public ItemBuff[] buffs;
+    public Item()
+    {
+        Name = "";
+        ID = -1;
+    }
     public Item(ItemObject item)
     {
         Name = item.name;
-        ID = item.ID;
-        buffs = new ItemBuff[item.buffs.Length];
+        ID = item.data.ID;
+        buffs = new ItemBuff[item.data.buffs.Length];
 
         for (int i = 0; i < buffs.Length; i++)
         {
-            buffs[i] = new ItemBuff(item.buffs[i].min, item.buffs[i].max);
-            buffs[i].attribute = item.buffs[i].attribute;
+            buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max);
+            buffs[i].attribute = item.data.buffs[i].attribute;
         }
     }
 }

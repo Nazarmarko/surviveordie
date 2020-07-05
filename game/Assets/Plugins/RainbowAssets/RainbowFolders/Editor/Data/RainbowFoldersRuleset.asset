@@ -749,7 +749,7 @@ MonoBehaviour:
     Key: Assets/Scripts/Inventory/Scriptable Objetcs
     Ordinal: 61
     Priority: 0
-    IconType: 120
+    IconType: 150
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0
@@ -761,7 +761,7 @@ MonoBehaviour:
     Key: Assets/Scripts/Inventory/InventoryConected
     Ordinal: 62
     Priority: 0
-    IconType: 120
+    IconType: 150
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0
@@ -773,7 +773,7 @@ MonoBehaviour:
     Key: Assets/Scripts/Inventory/ItemConected
     Ordinal: 63
     Priority: 0
-    IconType: 120
+    IconType: 150
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0
@@ -882,6 +882,18 @@ MonoBehaviour:
     Ordinal: 72
     Priority: 0
     IconType: 140
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/Scripts/Inventory/Interface
+    Ordinal: 73
+    Priority: 0
+    IconType: 150
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0

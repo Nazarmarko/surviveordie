@@ -12,21 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8ee9e472aa7584da29076b851c2683, type: 3}
   m_Name: '#6Apple'
   m_EditorClassIdentifier: 
-  ID: 6
   uiDisplay: {fileID: -3653385446848040535, guid: e7be76e076008ec43abdf4bf14da3af0,
     type: 3}
   type: 0
+  stackable: 1
   descriptionText: Fucking Shit
-  buffs:
-  - attribute: 0
-    value: 0
-    min: 2
-    max: 3
-  - attribute: 1
-    value: 0
-    min: 1
-    max: 3
-  - attribute: 3
-    value: 0
-    min: 1
-    max: 2
+  data:
+    Name: 
+    ID: 6
+    buffs: []

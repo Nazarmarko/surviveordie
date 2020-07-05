@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private Rigidbody2D rb;
 
-    public Animator inventoryAnim;
-    public InventoryObject inventory;
+    public Animator inventoryAnim, equipmentInventoryAnim;
+    public InventoryObject inventory, equipment;
 
     private Vector2 move;
 
@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float speedForce, accelerateForce;
 
     private float forceNormilized;
+
     void OnEnable()
     {
         forceNormilized = speedForce;
@@ -49,16 +50,30 @@ public class PlayerController : MonoBehaviour
                 inventoryAnim.SetBool("IsOpen", false);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (equipmentInventoryAnim.GetBool("IsOpened") == false)
+            {
+                equipmentInventoryAnim.SetBool("IsOpened", true);
+            }
+            else
+            {
+                equipmentInventoryAnim.SetBool("IsOpened", false);
+            }
+        }
         #endregion
 
         #region IventoryLoadInput
         if (Input.GetKeyDown(KeyCode.P))
         {
             inventory.Load();
+            equipment.Load();
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
             inventory.Save();
+            equipment.Save();
         }
         #endregion
 
@@ -75,12 +90,16 @@ public class PlayerController : MonoBehaviour
         var item = collision.GetComponent<GroundItem>();
         if (item)
         {
-            inventory.AddItem(new Item(item.item), 1);
-            Destroy(collision.gameObject);
+            Item _item = new Item(item.item);
+            if (inventory.AddItem(_item, 1))
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
     private void OnApplicationQuit()
     {
-        inventory.Container.Items = new InventorySlot[25];
+        inventory.Container.Clear();
+        equipment.Container.Clear();
     }
 }
