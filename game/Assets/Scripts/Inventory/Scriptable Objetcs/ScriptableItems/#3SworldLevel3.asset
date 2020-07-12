@@ -19,4 +19,8 @@ MonoBehaviour:
   data:
     Name: 
     ID: 3
-    buffs: []
+    buffs:
+    - attribute: 2
+      value: 0
+      min: 6
+      max: 9

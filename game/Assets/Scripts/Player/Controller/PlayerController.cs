@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Animator playerAnim;
     private Rigidbody2D rb;
+    public Animator inventoryAnim, equipmentInventoryAnim, playerAnim;
 
-    public Animator inventoryAnim, equipmentInventoryAnim;
     public InventoryObject inventory, equipment;
+
+    public Attribute[] attributes;
 
     private Vector2 move;
 
@@ -23,6 +24,67 @@ public class PlayerController : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+
+        for (int i = 0; i < attributes.Length; i++)
+        {
+            attributes[i].SetParent(this);
+        }
+        for (int i = 0; i < equipment.GetSlots.Length; i++)
+        {
+            equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;
+            equipment.GetSlots[i].OnAfterUpdate += OnAfterSlotUpdate;
+        }
+    }
+    public void OnBeforeSlotUpdate(InventorySlot _slot)
+    {
+        if (_slot.ItemObject == null)
+            return;
+
+        switch (_slot.parent.inventory.type)
+        {
+            case InterfaceType.Inventory:
+                break;
+            case InterfaceType.Equipment:
+                for (int i = 0; i < _slot.item.buffs.Length; i++)
+                {
+                    for (int j = 0; j < attributes.Length; j++)
+                    {
+                        if (attributes[j].type == _slot.item.buffs[i].attribute)
+                            attributes[j].value.RemoveModifier(_slot.item.buffs[i]);
+                    }
+                }
+                break;
+            case InterfaceType.Chest:
+                break;
+            default:
+                break;
+        }
+
+    }
+    public void OnAfterSlotUpdate(InventorySlot _slot)
+    {
+        if (_slot.ItemObject == null)
+            return;
+
+        switch (_slot.parent.inventory.type)
+        {
+            case InterfaceType.Inventory:
+                break;
+            case InterfaceType.Equipment:
+                for (int i = 0; i < _slot.item.buffs.Length; i++)
+                {
+                    for (int j = 0; j < attributes.Length; j++)
+                    {
+                        if (attributes[j].type == _slot.item.buffs[i].attribute)
+                            attributes[j].value.AddModifier(_slot.item.buffs[i]);
+                    }
+                }
+                break;
+            case InterfaceType.Chest:
+                break;
+            default:
+                break;
+        }
     }
     void Update()
     {
@@ -97,9 +159,33 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void AttributeModified(Attribute attribute)
+    {
+
+    }
+
     private void OnApplicationQuit()
     {
-        inventory.Container.Clear();
-        equipment.Container.Clear();
+        inventory.Clear();
+        equipment.Clear();
+    }
+
+    [System.Serializable]
+    public class Attribute
+    {
+        [System.NonSerialized]
+        public PlayerController parent;
+        public Attributes type;
+        public ModifiableInt value;
+        public void SetParent(PlayerController _parent)
+        {
+            parent = _parent;
+            value = new ModifiableInt(AttributeModified);
+        }
+        public void AttributeModified()
+        {
+            parent.AttributeModified(this);
+        }
     }
 }

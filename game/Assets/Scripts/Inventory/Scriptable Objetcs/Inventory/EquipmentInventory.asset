@@ -12,66 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f25a4cf2a60b67449701a14428d29be, type: 3}
   m_Name: EquipmentInventory
   m_EditorClassIdentifier: 
+  type: 1
   safePath: /equipment.Save
   database: {fileID: 11400000, guid: 59dd1699a8dc118419bdeb14a75d8544, type: 2}
   Container:
-    Items:
+    Slots:
     - AllowedItems: 01000000
       amount: 0
-      parent: {fileID: 0}
       item:
         Name: 
         ID: -1
         buffs: []
     - AllowedItems: 02000000
       amount: 0
-      parent: {fileID: 0}
       item:
         Name: 
         ID: -1
         buffs: []
     - AllowedItems: 05000000
-      amount: 1
-      parent: {fileID: 0}
+      amount: 0
       item:
-        Name: '#6Apple'
+        Name: 
         ID: -1
-        buffs:
-        - attribute: 0
-          value: 2
-          min: 2
-          max: 3
-        - attribute: 1
-          value: 2
-          min: 1
-          max: 3
-        - attribute: 3
-          value: 1
-          min: 1
-          max: 2
+        buffs: []
     - AllowedItems: 0200000003000000
       amount: 0
-      parent: {fileID: 0}
       item:
         Name: 
         ID: -1
         buffs: []
     - AllowedItems: 04000000
-      amount: 1
-      parent: {fileID: 0}
+      amount: 0
       item:
-        Name: '#0Strawberry'
+        Name: 
         ID: -1
-        buffs:
-        - attribute: 0
-          value: 12
-          min: 1
-          max: 15
-        - attribute: 1
-          value: 17
-          min: 9
-          max: 20
-        - attribute: 0
-          value: 8
-          min: 6
-          max: 10
+        buffs: []

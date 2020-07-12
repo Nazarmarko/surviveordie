@@ -5,11 +5,15 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using System;
 
 public abstract class UserInterface : MonoBehaviour
 {
     #region Variables
     public InventoryObject inventory;
+
+    public GameObject itemOnGround;
+    public Transform playerTransform;
 
     public Dictionary<GameObject, InventorySlot> slotsOnIterface = new Dictionary<GameObject, InventorySlot>();
     #endregion
@@ -19,10 +23,10 @@ public abstract class UserInterface : MonoBehaviour
     {
         slotsOnIterface.UpdateSlotDisplay();
 
-        for (int i = 0; i < inventory.Container.Items.Length; i++)
-        {
-            Debug.Log("1");
-            inventory.Container.Items[i].parent = this;
+        for (int i = 0; i < inventory.GetSlots.Length; i++)
+        { 
+            inventory.GetSlots[i].parent = this;
+            inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
         }
 
         CreateSlots();
@@ -31,6 +35,30 @@ public abstract class UserInterface : MonoBehaviour
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
     }
+
+    private void OnSlotUpdate(InventorySlot _slot)
+    {
+
+        if (_slot.item.ID >= 0)
+        {
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite
+                = _slot.ItemObject.uiDisplay;
+
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+
+            _slot.slotDisplay.GetComponentInChildren<TextMeshProUGUI>().text
+                = _slot.amount == 1 ? "" : _slot.amount.ToString("n0");
+        }
+        else
+        {
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+
+            _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+
+            _slot.slotDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        }
+    }
+
     public abstract void CreateSlots();
 
     #endregion
@@ -89,6 +117,10 @@ public abstract class UserInterface : MonoBehaviour
 
         if (MouseData.interfaceMouseIsOver == null)
         {
+          GameObject itemObj =  Instantiate(itemOnGround, playerTransform.position, Quaternion.identity);
+    
+            itemObj.GetComponent<GroundItem>().item = slotsOnIterface[obj].ItemObject;
+
             slotsOnIterface[obj].RemoveItem();
             return;
         }
@@ -102,13 +134,6 @@ public abstract class UserInterface : MonoBehaviour
     {
         if (MouseData.tempItemBeingDragged != null)
             MouseData.tempItemBeingDragged.GetComponent<RectTransform>().position = Input.mousePosition;
-    }
-    #endregion
-
-    #region UpdateInventory
-    void Update()
-    {
-        slotsOnIterface.UpdateSlotDisplay();
     }
     #endregion
 }
