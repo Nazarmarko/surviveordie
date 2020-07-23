@@ -7,9 +7,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public Animator inventoryAnim, equipmentInventoryAnim, playerAnim;
 
+    public GameObject[] shieldsObj;
+
     public InventoryObject inventory, equipment;
 
     public Attribute[] attributes;
+
+    private Stats playerStats;
 
     private Vector2 move;
 
@@ -18,12 +22,14 @@ public class PlayerController : MonoBehaviour
 
     private float forceNormilized;
 
+    public SpriteRenderer[] armors;
     void OnEnable()
     {
         forceNormilized = speedForce;
 
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+        playerStats = GetComponent<Stats>();
 
         for (int i = 0; i < attributes.Length; i++)
         {
@@ -31,19 +37,20 @@ public class PlayerController : MonoBehaviour
         }
         for (int i = 0; i < equipment.GetSlots.Length; i++)
         {
-            equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;
-            equipment.GetSlots[i].OnAfterUpdate += OnAfterSlotUpdate;
+            equipment.GetSlots[i].OnBeforeUpdate += OnRemoveItem;
+            equipment.GetSlots[i].OnAfterUpdate += OnAddItem;
         }
     }
-    public void OnBeforeSlotUpdate(InventorySlot _slot)
+
+    #region SlotConected
+    public void OnRemoveItem(InventorySlot _slot)
     {
         if (_slot.ItemObject == null)
             return;
 
         switch (_slot.parent.inventory.type)
         {
-            case InterfaceType.Inventory:
-                break;
+
             case InterfaceType.Equipment:
                 for (int i = 0; i < _slot.item.buffs.Length; i++)
                 {
@@ -53,23 +60,45 @@ public class PlayerController : MonoBehaviour
                             attributes[j].value.RemoveModifier(_slot.item.buffs[i]);
                     }
                 }
-                break;
-            case InterfaceType.Chest:
-                break;
-            default:
+                if (_slot.ItemObject.uiDisplay != null)
+                {
+                    switch (_slot.AllowedItems[0])
+                    {
+                        case ItemType.Helmet:
+                            playerStats.ArmorOnPlayerVisualise(null, 0);
+                            playerStats.ArmorVisualise(0, playerStats.chestInt, playerStats.bootsInt);
+                            break;
+                        case ItemType.Weapon:
+                            break;
+                        case ItemType.Shields:
+
+                            break;
+                        case ItemType.Boots:
+                            playerStats.ArmorOnPlayerVisualise(null, 2);
+                            playerStats.ArmorVisualise(playerStats.headInt, playerStats.chestInt, 0);
+                            break;
+                        case ItemType.Chest:
+                            playerStats.ArmorOnPlayerVisualise(null, 1);
+                            playerStats.ArmorVisualise(playerStats.headInt, 0, playerStats.bootsInt);
+                            break;
+                    }
+                }
                 break;
         }
 
     }
-    public void OnAfterSlotUpdate(InventorySlot _slot)
+    public void OnAddItem(InventorySlot _slot)
     {
         if (_slot.ItemObject == null)
             return;
 
+        int armorValue = _slot.item.buffs[0].value;
+
+        Sprite armorSprite = _slot.ItemObject.uiDisplay;
+
         switch (_slot.parent.inventory.type)
         {
-            case InterfaceType.Inventory:
-                break;
+
             case InterfaceType.Equipment:
                 for (int i = 0; i < _slot.item.buffs.Length; i++)
                 {
@@ -79,15 +108,44 @@ public class PlayerController : MonoBehaviour
                             attributes[j].value.AddModifier(_slot.item.buffs[i]);
                     }
                 }
-                break;
-            case InterfaceType.Chest:
-                break;
-            default:
+
+                if (_slot.ItemObject.uiDisplay != null)
+                {
+                    switch (_slot.AllowedItems[0])
+                    {
+                        case ItemType.Helmet:
+                            playerStats.ArmorOnPlayerVisualise(armorSprite, 0);
+                            playerStats.ArmorVisualise(armorValue, playerStats.chestInt, playerStats.bootsInt);
+                            break;
+                        case ItemType.Weapon:
+                            break;
+                        case ItemType.Shields:
+                            switch (_slot.ItemObject.type)
+                            {
+                                case ItemType.Weapon:
+                                    break;
+                                case ItemType.Shields:
+                                    break;
+                            }
+                            break;
+                        case ItemType.Boots:
+                            playerStats.ArmorOnPlayerVisualise(armorSprite, 2);
+                            playerStats.ArmorVisualise(playerStats.headInt, playerStats.chestInt, armorValue);
+                            break;
+                        case ItemType.Chest:
+                            playerStats.ArmorOnPlayerVisualise(armorSprite, 1);
+                            playerStats.ArmorVisualise(playerStats.headInt, armorValue, playerStats.bootsInt);
+                            break;
+                    }
+                }
                 break;
         }
     }
+    #endregion
+
     void Update()
     {
+
         #region MovementInput
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (Input.GetKey(KeyCode.LeftShift))
@@ -97,6 +155,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             speedForce = forceNormilized;
+        }
+
+        if (move.x >= 0)
+        {
+            this.transform.localScale = new Vector3(5, 5, 1);
+        }
+        else
+        {
+            this.transform.localScale = new Vector3(-5, 5, 1);
         }
         #endregion
 
@@ -139,9 +206,10 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
 
+        #region AnimatorController
         playerAnim.SetFloat("Horizontal", move.x);
-        playerAnim.SetFloat("Vertical", move.y);
         playerAnim.SetFloat("speed", move.sqrMagnitude);
+        #endregion
     }
     void FixedUpdate()
     {
@@ -160,6 +228,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Attribute
     public void AttributeModified(Attribute attribute)
     {
 
@@ -188,4 +257,5 @@ public class PlayerController : MonoBehaviour
             parent.AttributeModified(this);
         }
     }
+    #endregion
 }
