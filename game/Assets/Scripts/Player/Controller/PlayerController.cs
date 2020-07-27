@@ -69,9 +69,10 @@ public class PlayerController : MonoBehaviour
                             playerStats.ArmorVisualise(0, playerStats.chestInt, playerStats.bootsInt);
                             break;
                         case ItemType.Weapon:
+                            playerStats.weaponInt = 0;
                             break;
                         case ItemType.Shields:
-
+                            playerStats.shealdInt = 0;
                             break;
                         case ItemType.Boots:
                             playerStats.ArmorOnPlayerVisualise(null, 2);
@@ -93,6 +94,8 @@ public class PlayerController : MonoBehaviour
             return;
 
         int armorValue = _slot.item.buffs[0].value;
+        int weaponValue = _slot.item.buffs[1].value;
+        int shealdValue = _slot.item.buffs[2].value;
 
         Sprite armorSprite = _slot.ItemObject.uiDisplay;
 
@@ -118,13 +121,16 @@ public class PlayerController : MonoBehaviour
                             playerStats.ArmorVisualise(armorValue, playerStats.chestInt, playerStats.bootsInt);
                             break;
                         case ItemType.Weapon:
+                            playerStats.weaponInt = weaponValue;
                             break;
                         case ItemType.Shields:
                             switch (_slot.ItemObject.type)
                             {
                                 case ItemType.Weapon:
+                                    playerStats.weaponInt = weaponValue;
                                     break;
                                 case ItemType.Shields:
+                                    playerStats.shealdInt = shealdValue;
                                     break;
                             }
                             break;

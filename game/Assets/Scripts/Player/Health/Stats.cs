@@ -5,18 +5,20 @@ public class Stats : MonoBehaviour
 {
     [Range(0.1f, 30)]
     [SerializeField]
-    float currentHealth, experience, gold, maxHealth;
+    int currentHealth, experience, gold, maxHealth;
 
     public TMP_Text expText, goldText;
 
-    public Image[] armorLevelImages;
+    public Image[] armorLevelImages, healthLevelImages;
     public SpriteRenderer[] armorOnPlayerSprite;
 
-    public int MinValue, MaxValue, currentValue, headInt, chestInt, bootsInt;
+    public int MinValue, MaxValue, currentValue, headInt, chestInt, bootsInt, weaponInt, shealdInt;
 
     void Start()
     {
         ArmorVisualise(headInt, chestInt, bootsInt);
+
+        HealthVisualise(maxHealth);
     }
     void Update()
     {
@@ -30,6 +32,7 @@ public class Stats : MonoBehaviour
             //Die
         }
     }
+    #region ArmorVisualise
     public void ArmorOnPlayerVisualise(Sprite armorSprite, int armorType)
     {
         armorOnPlayerSprite[armorType].sprite = armorSprite;
@@ -50,7 +53,20 @@ public class Stats : MonoBehaviour
                 armorLevelImages[i].enabled = true;
         }
     }
-    public void Heal(float amount)
+    #endregion
+
+    public void HealthVisualise(int healthInt)
+    {
+        currentHealth -= healthInt;
+        for (int i = 0; i < healthLevelImages.Length; i++)
+        {
+            if (healthInt <= i)
+                healthLevelImages[i].enabled = false;
+            else
+                healthLevelImages[i].enabled = true;
+        }
+    }
+    public void Heal(int amount)
     {
         currentHealth += amount;
 
@@ -58,10 +74,6 @@ public class Stats : MonoBehaviour
         {
             maxHealth = currentHealth;
         }
-    }
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
     }
 }
 
