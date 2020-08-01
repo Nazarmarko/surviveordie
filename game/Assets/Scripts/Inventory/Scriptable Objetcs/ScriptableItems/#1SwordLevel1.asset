@@ -25,3 +25,11 @@ MonoBehaviour:
       value: 0
       min: 1
       max: 3
+    - attribute: 2
+      value: 0
+      min: 0
+      max: 0
+    - attribute: 2
+      value: 0
+      min: 0
+      max: 0
