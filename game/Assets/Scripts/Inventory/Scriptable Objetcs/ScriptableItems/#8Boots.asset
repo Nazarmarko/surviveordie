@@ -19,7 +19,7 @@ MonoBehaviour:
   descriptionText: 
   data:
     Name: 
-    ID: 9
+    ID: 8
     buffs:
     - attribute: 0
       value: 0

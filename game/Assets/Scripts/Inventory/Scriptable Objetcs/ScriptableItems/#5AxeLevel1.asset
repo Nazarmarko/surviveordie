@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d0f260b8f9f87459b650e9fa525195, type: 3}
   m_Name: '#5AxeLevel1'
   m_EditorClassIdentifier: 
-  ID: 5
   uiDisplay: {fileID: 816653016490373050, guid: e7be76e076008ec43abdf4bf14da3af0,
     type: 3}
   type: 2
+  stackable: 0
   descriptionText: 
-  buffs: []
+  data:
+    Name: 
+    ID: 5
+    buffs: []
