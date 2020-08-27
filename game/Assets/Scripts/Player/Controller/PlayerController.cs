@@ -142,6 +142,10 @@ public class PlayerController : MonoBehaviour
                             playerStats.ArmorOnPlayerVisualise(armorSprite, 1);
                             playerStats.ArmorVisualise(playerStats.headInt, armorValue, playerStats.bootsInt);
                             break;
+                        //case ItemType.Tool:
+                        //    playerStats.ArmorOnPlayerVisualise(armorSprite, 1);
+                        //    playerStats.ArmorVisualise(playerStats.headInt, armorValue, playerStats.bootsInt);
+                        //    break;
                     }
                 }
                 break;

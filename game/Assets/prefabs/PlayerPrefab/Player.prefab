@@ -33,7 +33,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.0596511, y: 1.3534845, z: -1}
   m_LocalScale: {x: 5, y: 5, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1791934151214214163}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,8 +50,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0151e1a34610274795c56062fddf451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryAnim: {fileID: 0}
+  equipmentInventoryAnim: {fileID: 0}
+  playerAnim: {fileID: 0}
+  shieldsObj: []
+  inventory: {fileID: 0}
+  equipment: {fileID: 0}
+  attributes: []
   speedForce: 4.6
   accelerateForce: 6
+  armors: []
 --- !u!114 &6974027152330052714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +196,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf462636894ca442864e2bbb41e1fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8653209766059879431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1791934151214214163}
+  m_Layer: 0
+  m_Name: ToolHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1791934151214214163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8653209766059879431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6858876380294202525}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

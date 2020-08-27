@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType { Heal, Helmet, Weapon, Shields, Boots, Chest, Default }
+public enum ItemType { Heal, Helmet, Weapon, Shields, Boots, Chest, Tool, Default }
 public enum Attributes { Stamina, Health, Strength, Starve }
 public class ItemObject : ScriptableObject
 {

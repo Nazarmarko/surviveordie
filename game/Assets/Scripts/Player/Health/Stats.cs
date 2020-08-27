@@ -11,6 +11,7 @@ public class Stats : MonoBehaviour
 
     public Image[] armorLevelImages, healthLevelImages;
     public SpriteRenderer[] armorOnPlayerSprite;
+    public SpriteRenderer[] toolOnPlayerSprite;
 
     public int MinValue, MaxValue, currentValue, headInt, chestInt, bootsInt, weaponInt, shealdInt;
 
